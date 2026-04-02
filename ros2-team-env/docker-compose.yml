@@ -1,0 +1,28 @@
+services:
+  ros2-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_UID: ${UID:-1001}
+        USER_GID: ${GID:-1001}
+        USERNAME: ros
+    image: ghcr.io/camelwater/ros2-team:v1
+    container_name: ros2-team-dev
+    stdin_open: true
+    tty: true
+    network_mode: host
+    ipc: host
+    pid: host
+    privileged: true
+    environment:
+      ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-42}
+      RMW_IMPLEMENTATION: rmw_fastrtps_cpp
+      DISPLAY: ${DISPLAY:-}
+      QT_X11_NO_MITSHM: 1
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
+    volumes:
+      - ./src:/workspace/src
+    working_dir: /workspace/src
+    command: bash
