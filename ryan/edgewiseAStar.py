@@ -19,21 +19,23 @@ class Astar:
     #Set the edge along two neighboring vertices.
     def edge(self, xoyo: tuple, xy: tuple) -> None:
         #automatic establishing of vertices if not already set
-        if not xoyo in self.vMap: self.vertex(xoyo)
-        if not xy in self.vMap: self.vertex(xy)
+        if not xoyo in self.vMap:
+            self.vertex(xoyo)
+        if not xy in self.vMap:
+            self.vertex(xy)
         #record the edges -> this is hard coded as bidirectional, because of the dynamic nature of the map.
         self.eMap[xoyo].append(xy)
         self.eMap[xy].append(xoyo)
 
     #Return the heuristic for two points
     def heuristic(self, xyo: tuple, xy: tuple) -> float:
-        xo, yo = self.vMap[xyo]
-        x, y = self.vMap[xy]
+        xo, yo = xyo
+        x, y = xy
         d = ((x - xo)**2 + (y - yo)**2)**0.5
         return d
     
     #Return the best path of from the current position to the goal. If no path available, or already at goal, returns an empty array.
-    def path(self, position: tuple, goal: tuple):
+    def path(self, position: tuple, goal: tuple) -> list[tuple]:
         #establish a priority queue (heap) and also another hashmap that details what vertices have been used.
         pq, used = [], {}
         #initialize heap with current position
@@ -73,6 +75,7 @@ class Astar:
                 #you can reuse the heuristic cost to calculate physical g in next iterations
                 dg = 1.0
 
+                #print("considering", neighbor)
                 #the new cost is the cumulative g plus new edge cost plus the heuristic
                 cost = g+dg + self.heuristic(neighbor,goal)
                 #push the item to the priority queue
