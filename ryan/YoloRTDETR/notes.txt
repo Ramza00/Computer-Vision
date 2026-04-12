@@ -1,0 +1,1 @@
+custom trained RT-DETR on HomeObjects-3K. It performed better than the standard RT-DETR, detecting at higher accuracy. However, with regards to YOLO-26, YOLO's confidence of detection is noticeably higher, at around 0.05. However, the custom RT-DETR would evaluate more items as the class of interest. Further training may yield non-marginally better results.
