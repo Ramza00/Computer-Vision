@@ -1,0 +1,233 @@
+[
+  {
+    "name": "basic_wall_with_gap",
+    "description": "A vertical wall blocks the middle except for one gap. A valid path must route through the gap.",
+    "grid": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "start": [
+      0,
+      0
+    ],
+    "goal": [
+      6,
+      6
+    ],
+    "expected": {
+      "path_exists": true,
+      "shortest_path_length_4_connected": 12
+    }
+  },
+  {
+    "name": "no_path",
+    "description": "The goal is completely separated from the start by obstacles.",
+    "grid": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "start": [
+      0,
+      0
+    ],
+    "goal": [
+      2,
+      2
+    ],
+    "expected": {
+      "path_exists": false
+    }
+  },
+  {
+    "name": "narrow_corridor",
+    "description": "Follow a one-cell-wide corridor.",
+    "grid": [
+      [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    ],
+    "start": [
+      0,
+      0
+    ],
+    "goal": [
+      7,
+      7
+    ],
+    "expected": {
+      "path_exists": true,
+      "shortest_path_length_4_connected": 14
+    }
+  }
+]
