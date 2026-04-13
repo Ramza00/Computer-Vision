@@ -35,6 +35,7 @@ class Astar:
         return d
     
     #Return the best path of from the current position to the goal. If no path available, or already at goal, returns an empty array.
+    #The path considers the originating position (position) as part of the path.
     def path(self, position: tuple, goal: tuple) -> list[tuple]:
         #establish a priority queue (heap) and also another hashmap that details what vertices have been used.
         pq, used = [], {}
@@ -82,4 +83,29 @@ class Astar:
                 heapq.heappush(pq, (cost, g+dg, neighbor, nPath))
 
         return []
+    
+    #Reduce the path. Simplistic implementation made by removing any points in a line segment.
+    #Expects the result of the path method as an input.
+    #If a reduced path without the origin is needed, use reduce(path())[1:]
+    def reduce(self,path: list[tuple]) -> list[tuple]:
+        if len(path) < 2:
+            return path
 
+        newpath: list[tuple] = [path[0]]
+
+        def direction(a: tuple, b: tuple) -> tuple:
+            dx = b[0] - a[0]
+            dy = b[1] - a[1]
+            return (dx // abs(dx) if dx else 0,
+                    dy // abs(dy) if dy else 0)
+
+        current_dir = direction(path[0], path[1])
+
+        for i in range(1, len(path) - 1):
+            next_dir = direction(path[i], path[i + 1])
+            if next_dir != current_dir:
+                newpath.append(path[i])
+                current_dir = next_dir
+
+        newpath.append(path[-1])
+        return newpath

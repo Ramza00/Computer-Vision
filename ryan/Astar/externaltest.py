@@ -29,5 +29,7 @@ for test in data:
     result = AStar.path(start,goal)
     
     #abuse falsey to print correct results
-    if len(result): result.pop(0)
-    print("Expected: ", expected,"\nResult: ", str(len(result)) + "\nSpecific path: " + str(result) if len(result) else False)
+    if len(result):
+        print("Expected:", expected, "\nResult:", len(result)-1, "\nSpecific path:", result[1:], "\nLinear path:", AStar.reduce(result), "\n")
+    else:
+        print("Expected:", expected, "\nResult: 0\n")
