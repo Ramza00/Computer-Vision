@@ -10,13 +10,13 @@ class Astar:
         #The edge hashmap, recording the two connected xy coordinates.
         self.eMap : dict[tuple,list[tuple]] = {}
     
-    #Set a vertex at the indicated xy coordinates. Occupation indicates inability to traverse.
+    #Set a vertex at the indicated xy coordinates, a numerical value pair. Occupation indicates inability to traverse.
     def vertex(self, xy: tuple, occupied = False) -> None:
         #default occupation of the vertex is False (no obstacle)
         self.vMap[xy] = occupied
         self.eMap[xy] = []
 
-    #Set the edge along two neighboring vertices.
+    #Set the edge along two neighboring vertices. ie, declare two points as traversible.
     def edge(self, xoyo: tuple, xy: tuple) -> None:
         #automatic establishing of vertices if not already set
         if not xoyo in self.vMap:
@@ -27,7 +27,7 @@ class Astar:
         self.eMap[xoyo].append(xy)
         self.eMap[xy].append(xoyo)
 
-    #Return the heuristic for two points
+    #Return the heuristic for two points. Not intended to be used outside of the class.
     def heuristic(self, xyo: tuple, xy: tuple) -> float:
         xo, yo = xyo
         x, y = xy
@@ -36,7 +36,10 @@ class Astar:
     
     #Return the best path of from the current position to the goal. If no path available, or already at goal, returns an empty array.
     #The path considers the originating position (position) as part of the path.
-    def path(self, position: tuple, goal: tuple) -> list[tuple]:
+    #Position: the starting position
+    #Goal: the end position to aim for
+    #Reduction: whether or not to use reduction. Default no (False).
+    def path(self, position: tuple, goal: tuple, reduction : bool = False) -> list[tuple]:
         #establish a priority queue (heap) and also another hashmap that details what vertices have been used.
         pq, used = [], {}
         #initialize heap with current position
